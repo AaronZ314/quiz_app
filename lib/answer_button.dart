@@ -15,7 +15,8 @@ class AnswerButton extends StatelessWidget{
   @override
   Widget build(context) {
     return
-    ElevatedButton(onPressed: onTap,
+    ElevatedButton(
+    onPressed: onTap,
     style: ElevatedButton.styleFrom(
       padding: const EdgeInsets.symmetric(
         vertical: 10,
