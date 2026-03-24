@@ -1,30 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class QuestionSummary extends StatelessWidget{
-QuestionSummary({super.key, required this.summaryData});
+class QuestionSummary extends StatelessWidget {
+  const QuestionSummary({super.key, required this.summaryData});
 
-final List<Map<String,Object>> summaryData;
+  final List<Map<String, Object>> summaryData;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: summaryData.map(
-        (data){
-          return Row(
-            children: [
-              Text(((data['question_index'] as int)+ 1).toString()),
-              Column(
-                children: [
-                  Text(data['question'] as String),
-                  const SizedBox(height: 5,),
-                  Text(data['user_answer'] as String),
-                  Text(data['correct_answer'] as String),
-                ],
-              )
-            ],
+    //Wrap everything in a sizedBox to make the scrollable questions a certain size
+    return SizedBox(
+      height: 500,
+      //Wrap everything in SingleChildScrollView to allow the questions to scroll
+      child: SingleChildScrollView(
+        child: Column(
+          children: summaryData.map((data) {
+            return Row(
+              children: [
+                Text(
+                  style: GoogleFonts.lato(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  ((data['question_index'] as int) + 1).toString(),
+                ),
+                SizedBox(
+                  width: 280,
+                  child: Column(
+                    children: [
+                      Text(
+                        style: GoogleFonts.lato(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        data['question'] as String,
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        style: GoogleFonts.lato(
+                          color: Colors.red,
+                          fontSize: 18,
+                        ),
+                        data['user_answer'] as String,
+                      ),
+                      Text(
+                        style: GoogleFonts.lato(
+                          color: Colors.green,
+                          fontSize: 18,
+                        ),
+                        data['correct_answer'] as String,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             );
-        }
-        ).toList(),
-        );
+          }).toList(),
+        ),
+      ),
+    );
   }
 }
