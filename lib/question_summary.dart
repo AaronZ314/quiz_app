@@ -15,18 +15,24 @@ class QuestionSummary extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: summaryData.map((data) {
+
+            final bool isCorrect = data['user_answer'] == data['correct_answer'];
+
             return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   style: GoogleFonts.lato(
-                    color: Colors.white,
-                    fontSize: 20,
+                    //ternary operation that checks our boolean value, if true then make number green, if false make number red
+                    color: isCorrect ? Colors.green: Colors.red,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                   ((data['question_index'] as int) + 1).toString(),
                 ),
+                const SizedBox(width: 20),
                 SizedBox(
-                  width: 280,
+                  width: 260,
                   child: Column(
                     children: [
                       Text(
