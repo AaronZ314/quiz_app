@@ -22,9 +22,17 @@ class _QuizState extends State<Quiz> {
       setState(() {
         //This is going to change to deal with the answer screen
         //selectedAnswers = [];
-        activeScreen = ResultsScreen(chosenAnswers: selectedAnswers);
+        activeScreen = ResultsScreen(chosenAnswers: selectedAnswers, onRestart: restartQuiz,);
       });
     }
+  }
+
+  //Make selected answers blank to avoid errors with selected answers length and change active screen to start
+  void restartQuiz() {
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = StartScreen(switchScreen);
+    });
   }
 
   Widget? activeScreen;
